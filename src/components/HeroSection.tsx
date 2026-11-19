@@ -3,6 +3,7 @@ import { PrimaryCTA } from "@/components/PrimaryCTA";
 import { company } from "@/content/company";
 
 type Props = {
+  tag?: string;
   headline?: string;
   support?: string;
   imageSrc?: string;
@@ -11,14 +12,15 @@ type Props = {
 };
 
 export function HeroSection({
-  headline = "Bathroom Remodeling for Twin Cities Homeowners",
-  support = "Explore shower updates, tub-to-shower conversions, and bathroom remodeling options with Bath Renew. See our work, understand your options, and request a free estimate for your project.",
+  tag = "Bathroom remodeling, made personal",
+  headline = "A better bathroom starts with a better plan.",
+  support = "Explore shower updates, tub-to-shower conversions, and bathroom remodeling options with Bath Renew. Thoughtful planning, skilled local work, and clear next steps for Twin Cities homeowners.",
   imageSrc = "/images/projects/bathroom-feature.jpg",
   imageAlt = "Bathroom remodel photography from Bath Renew",
   priority = true,
 }: Props) {
   return (
-    <section className="relative isolate min-h-[min(92vh,52rem)] overflow-hidden">
+    <section className="relative isolate min-h-[min(92vh,48rem)] overflow-hidden">
       <Image
         src={imageSrc}
         alt={imageAlt}
@@ -27,23 +29,32 @@ export function HeroSection({
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/88 via-navy-deep/70 to-navy-deep/35" />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/50 via-transparent to-navy-deep/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25" />
 
-      <div className="page-shell relative flex min-h-[min(92vh,52rem)] items-end pb-16 pt-28 sm:items-center sm:pb-24 sm:pt-20">
+      <div className="page-shell relative flex min-h-[min(92vh,48rem)] items-end pb-16 pt-28 sm:items-center sm:pb-24 sm:pt-28">
         <div className="max-w-2xl animate-fade-up text-white">
-          <p className="mb-4 font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
+          <p className="section-tag !text-white/70">• {tag}</p>
+          <p className="mb-3 font-display text-2xl tracking-tight text-white sm:text-3xl">
             {company.brandName}
           </p>
-          <h1 className="font-display text-3xl leading-[1.1] text-white sm:text-4xl lg:text-5xl">
+          <h1 className="font-display text-4xl leading-[1.08] text-white sm:text-5xl lg:text-[3.5rem]">
             {headline}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
             {support}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <PrimaryCTA href={company.primaryCtaHref} label={company.primaryCtaLabel} />
-            <PrimaryCTA href="/our-work" label="View Our Work" variant="secondary" className="border-white/30 bg-white/10 text-white hover:bg-white/20" />
+            <PrimaryCTA
+              href={company.primaryCtaHref}
+              label="Request a Free Estimate"
+              variant="on-dark"
+            />
+            <PrimaryCTA
+              href="/our-work"
+              label="Explore Our Work"
+              variant="ghost-on-dark"
+            />
           </div>
         </div>
       </div>

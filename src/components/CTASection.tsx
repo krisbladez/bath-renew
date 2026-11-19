@@ -16,11 +16,11 @@ export function CTASection({
   return (
     <section className="section-pad">
       <div className="page-shell">
-        <div className="rounded-card border border-line bg-surface px-6 py-12 text-center shadow-soft sm:px-10">
+        <div className="rounded-2xl bg-sand px-6 py-14 text-center sm:px-10">
           <h2 className="font-display text-3xl text-navy-deep sm:text-4xl">{headline}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted">{support}</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <PrimaryCTA href={company.primaryCtaHref} label={company.primaryCtaLabel} />
+            <PrimaryCTA href={company.primaryCtaHref} label="Request a Free Estimate" />
             <a
               href={company.phoneHref}
               className="btn-secondary"
@@ -28,15 +28,6 @@ export function CTASection({
             >
               Call Now
             </a>
-            {company.supportsTexting ? (
-              <a
-                href={company.smsHref}
-                className="btn-ghost"
-                onClick={() => trackEvent("click_to_text")}
-              >
-                Text Us
-              </a>
-            ) : null}
           </div>
         </div>
       </div>

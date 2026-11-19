@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --color-canvas: #f7f6f3;
+  /* Renovique-inspired neutrals + Bath Renew teal accent */
+  --color-canvas: #f4f3ee;
   --color-surface: #ffffff;
-  --color-ink: #1c2733;
-  --color-muted: #5c6b7a;
-  --color-line: #d9dee5;
-  --color-navy: #243b53;
-  --color-navy-deep: #102a43;
-  --color-navy-soft: #d9e2ec;
+  --color-sand: #ebe8e0;
+  --color-ink: #141414;
+  --color-muted: #5c5c5c;
+  --color-line: #ddd9d0;
+  --color-navy: #1a1a1a;
+  --color-navy-deep: #0f0f0f;
+  --color-navy-soft: #eceae4;
   --color-accent: #0f766e;
   --color-accent-hover: #0d5f59;
   --color-accent-soft: #d8f3f0;
@@ -39,10 +41,7 @@
 
   body {
     @apply bg-canvas text-ink font-sans antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 100% -10%, rgba(36, 59, 83, 0.07), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 0% 20%, rgba(15, 118, 110, 0.06), transparent 50%),
-      linear-gradient(180deg, #f7f6f3 0%, #f3f1ec 100%);
+    background-color: var(--color-canvas);
     min-height: 100vh;
   }
 
@@ -59,44 +58,69 @@
 
 @layer components {
   .page-shell {
-    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1064px] px-5 sm:px-8;
   }
 
   .section-pad {
     @apply py-16 sm:py-20 lg:py-24;
   }
 
+  /* Offset fixed header on pages that start with a content section */
+  main > .section-pad:first-child {
+    padding-top: calc(4.75rem + 3.5rem);
+  }
+
+  .section-tag {
+    @apply mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted;
+  }
+
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-accent text-white hover:bg-accent-hover focus-visible:outline-accent;
+    @apply btn bg-navy text-white hover:bg-navy-deep focus-visible:outline-navy;
   }
 
   .btn-secondary {
-    @apply btn border bg-surface text-navy focus-visible:outline-navy;
-    border-color: color-mix(in srgb, var(--color-navy) 20%, transparent);
+    @apply btn border bg-transparent text-navy focus-visible:outline-navy;
+    border-color: color-mix(in srgb, var(--color-navy) 25%, transparent);
   }
 
   .btn-secondary:hover {
-    border-color: color-mix(in srgb, var(--color-navy) 40%, transparent);
-    background-color: color-mix(in srgb, var(--color-navy-soft) 40%, transparent);
+    @apply bg-navy text-white;
+  }
+
+  .btn-on-dark {
+    @apply btn bg-white text-navy hover:bg-canvas focus-visible:outline-white;
+  }
+
+  .btn-ghost-on-dark {
+    @apply btn border bg-transparent text-white focus-visible:outline-white;
+    border-color: color-mix(in srgb, white 70%, transparent);
+  }
+
+  .btn-ghost-on-dark:hover {
+    @apply bg-white text-navy;
   }
 
   .btn-ghost {
-    @apply btn text-navy focus-visible:outline-navy;
-  }
-
-  .btn-ghost:hover {
-    background-color: color-mix(in srgb, var(--color-navy-soft) 50%, transparent);
+    @apply btn text-navy hover:bg-sand focus-visible:outline-navy;
   }
 
   .surface-card {
-    @apply rounded-card border border-line bg-surface shadow-soft;
+    @apply overflow-hidden rounded-2xl bg-surface;
+  }
+
+  .sand-card {
+    @apply overflow-hidden rounded-2xl bg-sand;
   }
 
   .draft-banner {
     @apply border-b border-amber-300/60 bg-amber-50 px-4 py-3 text-sm text-amber-950;
+  }
+
+  .text-link {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-navy transition hover:text-accent;
   }
 }

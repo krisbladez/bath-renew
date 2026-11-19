@@ -6,11 +6,19 @@ import { trackEvent } from "@/lib/analytics";
 type Props = {
   href: string;
   label: string;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "on-dark" | "ghost-on-dark";
   className?: string;
   eventName?: "promotion_cta_click" | "service_cta_click";
   eventParams?: Record<string, string>;
   external?: boolean;
+};
+
+const variantClass: Record<NonNullable<Props["variant"]>, string> = {
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  ghost: "btn-ghost",
+  "on-dark": "btn-on-dark",
+  "ghost-on-dark": "btn-ghost-on-dark",
 };
 
 export function PrimaryCTA({
@@ -22,27 +30,27 @@ export function PrimaryCTA({
   eventParams,
   external,
 }: Props) {
-  const variantClass =
-    variant === "primary"
-      ? "btn-primary"
-      : variant === "secondary"
-        ? "btn-secondary"
-        : "btn-ghost";
-
   const onClick = () => {
     if (eventName) trackEvent(eventName, eventParams);
   };
 
-  if (external || href.startsWith("tel:") || href.startsWith("sms:") || href.startsWith("mailto:")) {
+  const classes = `${variantClass[variant]} ${className}`.trim();
+
+  if (
+    external ||
+    href.startsWith("tel:") ||
+    href.startsWith("sms:") ||
+    href.startsWith("mailto:")
+  ) {
     return (
-      <a href={href} className={`${variantClass} ${className}`.trim()} onClick={onClick}>
+      <a href={href} className={classes} onClick={onClick}>
         {label}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={`${variantClass} ${className}`.trim()} onClick={onClick}>
+    <Link href={href} className={classes} onClick={onClick}>
       {label}
     </Link>
   );
