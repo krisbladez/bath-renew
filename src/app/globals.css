@@ -123,4 +123,18 @@
   .text-link {
     @apply text-xs font-semibold uppercase tracking-[0.14em] text-navy transition hover:text-accent;
   }
+
+  .trust-marquee {
+    width: max-content;
+    animation: trust-marquee 36s linear infinite;
+  }
+}
+
+@keyframes trust-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
 }

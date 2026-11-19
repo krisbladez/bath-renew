@@ -15,8 +15,8 @@ export function HeroSection({
   tag = "Bathroom remodeling, made personal",
   headline = "A better bathroom starts with a better plan.",
   support = "Explore shower updates, tub-to-shower conversions, and bathroom remodeling options with Bath Renew. Thoughtful planning, skilled local work, and clear next steps for Twin Cities homeowners.",
-  imageSrc = "/images/projects/bathroom-feature.jpg",
-  imageAlt = "Bathroom remodel photography from Bath Renew",
+  imageSrc = "/images/brand/hero-bathroom.jpg",
+  imageAlt = "Finished Bath Renew bathroom remodel with vanity and marble tile",
   priority = true,
 }: Props) {
   return (

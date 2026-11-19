@@ -5,17 +5,11 @@ import { HeroSection } from "@/components/HeroSection";
 import { PrimaryCTA } from "@/components/PrimaryCTA";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ServiceGrid } from "@/components/ServiceGrid";
+import { TrustMarquee } from "@/components/TrustMarquee";
 import { company, verifiedCommunities } from "@/content/company";
 import { homeFaqPreview } from "@/content/faqs";
 import { featuredProjectIds, projects } from "@/content/projects";
 import { promotion } from "@/content/promotion";
-
-const trustBar = [
-  "Thoughtful planning",
-  "Skilled local professionals",
-  "Clear project updates",
-  "Work built to last",
-];
 
 const renoviqueProcess = [
   {
@@ -73,21 +67,7 @@ export default function HomePage() {
     <>
       <HeroSection />
 
-      {/* Trust bar */}
-      <section className="border-y border-line bg-sand/70">
-        <div className="page-shell flex flex-wrap items-center justify-center gap-x-6 gap-y-3 py-5 text-sm text-navy/80 sm:justify-between">
-          {trustBar.map((item, i) => (
-            <span key={item} className="inline-flex items-center gap-6">
-              {i > 0 ? (
-                <span className="hidden text-line sm:inline" aria-hidden>
-                  ·
-                </span>
-              ) : null}
-              {item}
-            </span>
-          ))}
-        </div>
-      </section>
+      <TrustMarquee />
 
       {/* Services */}
       <section className="section-pad">
