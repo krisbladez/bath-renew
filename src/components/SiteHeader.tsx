@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { company } from "@/content/company";
 import { primaryNav } from "@/content/navigation";
 import { MobileNavigation } from "@/components/MobileNavigation";
@@ -10,17 +10,31 @@ import { trackEvent } from "@/lib/analytics";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-canvas/90 backdrop-blur-md">
-      <div className="page-shell flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition ${
+        scrolled
+          ? "border-b border-line/80 bg-canvas/95 backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="page-shell flex h-16 items-center justify-between gap-4 sm:h-[4.75rem]">
         <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="Bath Renew home">
           <Image
             src="/images/brand/logo.png"
             alt="Bath Renew"
             width={160}
             height={69}
-            className="h-10 w-auto sm:h-12"
+            className={`h-9 w-auto sm:h-11 ${scrolled ? "" : "brightness-0 invert"}`}
             priority
           />
         </Link>
@@ -30,7 +44,11 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-md px-2.5 py-2 text-sm font-medium text-navy/90 transition hover:bg-navy-soft/50 hover:text-navy-deep"
+              className={`rounded-full px-3 py-2 text-sm font-medium transition ${
+                scrolled
+                  ? "text-navy/85 hover:bg-sand hover:text-navy"
+                  : "text-white/90 hover:bg-white/10 hover:text-white"
+              }`}
             >
               {item.label}
             </Link>
@@ -40,28 +58,26 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={company.phoneHref}
-            className="hidden text-sm font-semibold text-navy xl:inline-flex"
+            className={`hidden text-sm font-semibold xl:inline-flex ${
+              scrolled ? "text-navy" : "text-white"
+            }`}
             onClick={() => trackEvent("click_to_call")}
           >
             {company.phoneDisplay}
           </a>
           <Link
             href={company.primaryCtaHref}
-            className="btn-primary hidden px-4 py-2.5 text-sm sm:inline-flex"
+            className={`hidden px-5 py-2.5 text-sm sm:inline-flex ${
+              scrolled ? "btn-primary" : "btn-on-dark"
+            }`}
           >
-            {company.primaryCtaLabel}
+            Request an Estimate
           </Link>
-          <a
-            href={company.phoneHref}
-            className="btn-secondary px-3 py-2 text-sm sm:hidden"
-            aria-label={`Call ${company.phoneDisplay}`}
-            onClick={() => trackEvent("click_to_call")}
-          >
-            Call
-          </a>
           <button
             type="button"
-            className="btn-ghost px-3 py-2 lg:hidden"
+            className={`px-3 py-2 text-sm font-semibold lg:hidden ${
+              scrolled ? "text-navy" : "text-white"
+            }`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen(true)}

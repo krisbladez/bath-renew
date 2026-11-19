@@ -9,10 +9,10 @@ type Props = {
 
 export function FAQAccordion({ items }: Props) {
   const baseId = useId();
-  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="divide-y divide-line rounded-card border border-line bg-surface">
+    <div className="divide-y divide-line border-y border-line">
       {items.map((item, index) => {
         const panelId = `${baseId}-panel-${index}`;
         const buttonId = `${baseId}-button-${index}`;
@@ -24,13 +24,13 @@ export function FAQAccordion({ items }: Props) {
               <button
                 id={buttonId}
                 type="button"
-                className="flex w-full items-start justify-between gap-4 px-4 py-4 text-left text-base font-semibold text-navy-deep hover:bg-navy-soft/20 sm:px-5"
+                className="flex w-full items-start justify-between gap-4 py-5 text-left text-base font-semibold text-navy-deep hover:text-accent"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpenId(isOpen ? null : item.id)}
               >
                 <span>{item.question}</span>
-                <span aria-hidden className="mt-0.5 text-accent">
+                <span aria-hidden className="mt-0.5 text-lg text-muted">
                   {isOpen ? "−" : "+"}
                 </span>
               </button>
@@ -40,7 +40,7 @@ export function FAQAccordion({ items }: Props) {
               role="region"
               aria-labelledby={buttonId}
               hidden={!isOpen}
-              className="px-4 pb-4 text-sm leading-relaxed text-muted sm:px-5"
+              className="pb-5 text-sm leading-relaxed text-muted"
             >
               <p>{item.answer}</p>
               {!item.verified ? (

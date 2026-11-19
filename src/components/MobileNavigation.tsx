@@ -57,22 +57,13 @@ export function MobileNavigation({ open, onClose }: Props) {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="block rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-navy-soft/40"
+                className="block rounded-xl px-3 py-3 text-base font-medium text-navy hover:bg-sand"
                 onClick={onClose}
               >
                 {item.label}
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href="/contact"
-              className="block rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-navy-soft/40"
-              onClick={onClose}
-            >
-              Contact
-            </Link>
-          </li>
         </ul>
         <div className="mt-auto space-y-3 border-t border-line p-4">
           <a
@@ -83,7 +74,7 @@ export function MobileNavigation({ open, onClose }: Props) {
             Call {company.phoneDisplay}
           </a>
           <Link href={company.primaryCtaHref} className="btn-primary w-full" onClick={onClose}>
-            {company.primaryCtaLabel}
+            Request an Estimate
           </Link>
         </div>
       </nav>

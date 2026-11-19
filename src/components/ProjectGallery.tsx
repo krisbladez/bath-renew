@@ -32,7 +32,7 @@ export function ProjectGallery({ projects, enableFilter = true }: Props) {
                 type="button"
                 role="tab"
                 aria-selected={selected}
-                className={`rounded-lg border px-3 py-2 text-sm font-medium transition ${
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                   selected
                     ? "border-navy bg-navy text-white"
                     : "border-line bg-surface text-navy hover:border-navy/30"
@@ -46,31 +46,36 @@ export function ProjectGallery({ projects, enableFilter = true }: Props) {
         </div>
       ) : null}
 
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-5 sm:grid-cols-2">
         {filtered.map((project) => (
           <li key={project.id}>
             <button
               type="button"
-              className="surface-card group w-full overflow-hidden text-left"
+              className="group relative block w-full overflow-hidden rounded-2xl text-left"
               onClick={() => setLightbox(project)}
               aria-label={`View ${project.title}`}
             >
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[5/4]">
                 <Image
                   src={project.image}
                   alt={project.imageAlt}
                   fill
-                  sizes="(max-width:768px) 100vw, 33vw"
+                  sizes="(max-width:768px) 100vw, 50vw"
                   className="object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
-              </div>
-              <div className="space-y-1 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <p className="absolute left-4 top-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
                   {project.category}
-                  {project.location ? ` · ${project.location}` : ""}
                 </p>
-                <h3 className="text-lg text-navy-deep">{project.title}</h3>
-                <p className="text-sm text-muted">{project.description}</p>
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <h3 className="font-display text-xl sm:text-2xl">{project.title}</h3>
+                  {project.location ? (
+                    <p className="mt-1 text-sm text-white/75">{project.location}</p>
+                  ) : null}
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/90">
+                    View project
+                  </p>
+                </div>
               </div>
             </button>
           </li>
@@ -90,7 +95,7 @@ export function ProjectGallery({ projects, enableFilter = true }: Props) {
             aria-label="Close image viewer"
             onClick={() => setLightbox(null)}
           />
-          <div className="relative z-10 w-full max-w-4xl overflow-hidden rounded-card bg-surface shadow-soft animate-fade-in">
+          <div className="relative z-10 w-full max-w-4xl overflow-hidden rounded-2xl bg-surface shadow-soft animate-fade-in">
             <div className="relative aspect-[16/10]">
               <Image
                 src={lightbox.image}
@@ -100,12 +105,12 @@ export function ProjectGallery({ projects, enableFilter = true }: Props) {
                 className="object-cover"
               />
             </div>
-            <div className="flex items-start justify-between gap-4 p-4">
+            <div className="flex items-start justify-between gap-4 p-5">
               <div>
-                <h3 className="text-xl text-navy-deep">{lightbox.title}</h3>
+                <h3 className="font-display text-xl text-navy-deep">{lightbox.title}</h3>
                 <p className="mt-1 text-sm text-muted">{lightbox.description}</p>
               </div>
-              <button type="button" className="btn-secondary px-3 py-2" onClick={() => setLightbox(null)}>
+              <button type="button" className="btn-secondary px-4 py-2" onClick={() => setLightbox(null)}>
                 Close
               </button>
             </div>
