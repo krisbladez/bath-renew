@@ -85,9 +85,9 @@ export function SiteFooter() {
       </div>
 
       <div className="overflow-hidden border-t border-white/10" aria-hidden>
-        <div className="page-shell pt-8 sm:pt-10">
-          <p className="select-none translate-y-[0.18em] text-center font-display text-[clamp(3.75rem,19vw,15rem)] font-semibold leading-none tracking-[-0.04em] text-white">
-            BATH RENEW
+        <div className="w-full pt-8 sm:pt-10">
+          <p className="select-none translate-y-[0.18em] whitespace-nowrap text-center font-display text-[clamp(2.75rem,14.5vw,12.5rem)] font-semibold leading-none tracking-[-0.04em] text-white">
+            BATH&nbsp;RENEW
           </p>
         </div>
       </div>
