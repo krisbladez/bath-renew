@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-canvas: #f7f6f3;
+  --color-surface: #ffffff;
+  --color-ink: #1c2733;
+  --color-muted: #5c6b7a;
+  --color-line: #d9dee5;
+  --color-navy: #243b53;
+  --color-navy-deep: #102a43;
+  --color-navy-soft: #d9e2ec;
+  --color-accent: #0f766e;
+  --color-accent-hover: #0d5f59;
+  --color-accent-soft: #d8f3f0;
+  --background: var(--color-canvas);
+  --foreground: var(--color-ink);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 100% -10%, rgba(36, 59, 83, 0.07), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 0% 20%, rgba(15, 118, 110, 0.06), transparent 50%),
+      linear-gradient(180deg, #f7f6f3 0%, #f3f1ec 100%);
+    min-height: 100vh;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-navy-deep tracking-tight;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-hover focus-visible:outline-accent;
+  }
+
+  .btn-secondary {
+    @apply btn border bg-surface text-navy focus-visible:outline-navy;
+    border-color: color-mix(in srgb, var(--color-navy) 20%, transparent);
+  }
+
+  .btn-secondary:hover {
+    border-color: color-mix(in srgb, var(--color-navy) 40%, transparent);
+    background-color: color-mix(in srgb, var(--color-navy-soft) 40%, transparent);
+  }
+
+  .btn-ghost {
+    @apply btn text-navy focus-visible:outline-navy;
+  }
+
+  .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--color-navy-soft) 50%, transparent);
+  }
+
+  .surface-card {
+    @apply rounded-card border border-line bg-surface shadow-soft;
+  }
+
+  .draft-banner {
+    @apply border-b border-amber-300/60 bg-amber-50 px-4 py-3 text-sm text-amber-950;
+  }
+}
